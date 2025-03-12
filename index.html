@@ -1,0 +1,38 @@
+
+o<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrir PDF ou Enviar SMS</title>
+    <script>
+        window.onload = function() {
+            // Testa se há conexão com a internet
+            if (navigator.onLine) {
+                // Redireciona para o PDF se houver internet
+                window.location.href = "https://drive.google.com/uc?id=1sIbxOsa8EHKd0TigWAth4bwPxCkPO08N";
+            } else {
+                // Se não houver internet, exibe a opção de SMS
+                document.getElementById("sms-option").style.display = "block";
+            }
+        };
+
+        function enviarSMS() {
+            let numero = document.getElementById("telefone").value.trim();
+            if (numero === "") {
+                alert("Por favor, digite um número de telefone válido.");
+                return;
+            }
+            let smsLink = `sms:+55${numero}?body=Quero%20receber%20o%20PDF`;
+            window.location.href = smsLink;
+        }
+    </script>
+</head>
+<body>
+    <div id="sms-option" style="display: none; text-align: center; padding: 20px;">
+        <h2>Sem internet? Insira seu telefone para receber o PDF via SMS</h2>
+        <input type="tel" id="telefone" placeholder="Digite seu número com DDD" style="font-size: 16px; padding: 8px;">
+        <button onclick="enviarSMS()" style="font-size: 18px; padding: 10px; margin-left: 10px;">Receber PDF</button>
+    </div>
+</body>
+</html>
